@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>All Koleksi Yanz</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding-top: 50px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .active {
+      display: block;
+    }
+
+    h1 {
+      font-size: 30px;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .button-container {
+      margin-top: 80px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .show-image-btn,
+    .next-page-btn,
+    .back-btn,
+    .cek-btn {
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .next-page-btn {
+      background-color: #ff9800;
+    }
+
+    .back-btn {
+      background-color: #9c27b0;
+    }
+
+    img {
+      margin-top: 20px;
+      display: none;
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .effect {
+      margin-top: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      animation: glow 2s infinite;
+      display: none;
+    }
+
+    @keyframes glow {
+      0% { color: lightblue; text-shadow: 0 0 5px #00f; }
+      50% { color: #00f; text-shadow: 0 0 20px #00f; }
+      100% { color: lightblue; text-shadow: 0 0 5px #00f; }
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 250px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Halaman 1: Koleksi -->
+  <div class="page active" id="page1" style="background-image: url('https://img1.pixhost.to/images/5063/588261454_skyzopedia.jpg');">
+    <h1>SILAKAN PILIHLAH KOLEKSI GUA DI BAWAH INI</h1>
+
+    <div class="button-container">
+      <div class="card">
+        <p>Foto Marcellus Crash:</p>
+        <button class="show-image-btn" onclick="showImage('marcellus')">Tampilkan Gambar</button>
+        <img id="image-marcellus" src="https://img1.pixhost.to/images/5063/588260701_skyzopedia.jpg">
+        <div class="effect" id="effect-marcellus">MARCELLUS GACOR</div>
+      </div>
+
+      <div class="card">
+        <p>Foto Cewek Gua:</p>
+        <button class="show-image-btn" onclick="showImage('cewek')">Tampilkan Gambar</button>
+        <img id="image-cewek" src="https://img1.pixhost.to/images/5063/588261922_skyzopedia.jpg">
+        <div class="effect" id="effect-cewek">CIKITUH SAYANG</div>
+      </div>
+    </div>
+
+    <button class="next-page-btn" onclick="goToPage('page2')">Halaman Berikutnya</button>
+  </div>
+
+  <!-- Halaman 2: Cek Dongo -->
+  <div class="page" id="page2" style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+    <h1>Cek Dongo</h1>
+    <input type="text" id="nama" placeholder="Masukkan Nama Dulu...">
+    <br>
+    <button class="cek-btn" onclick="cekDongo()">Cek Sekarang</button>
+    <div class="result" id="result"></div>
+    <br>
+    <button class="back-btn" onclick="goToPage('page1')">Kembali ke Koleksi</button>
+  </div>
+
+  <script>
+    function showImage(type) {
+      document.getElementById(`image-${type}`).style.display = 'block';
+      document.getElementById(`effect-${type}`).style.display = 'block';
+    }
+
+    function goToPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    function cekDongo() {
+      const nama = document.getElementById("nama").value.trim();
+      const resultDiv = document.getElementById("result");
+
+      if (nama === "") {
+        resultDiv.innerText = "Masukin nama dulu dong...";
+        return;
+      }
+
+      const jawaban = [
+        "bg yanz liat nih orang dongok",
+        `${nama} masih mendingan lah...`,
+        `Wah ${nama} 50% dongok, 50% waras`,
+        `${nama} aman bre, gak dongok kok`,
+        `Astaga ${nama} fix dongok kelas kakap`
+      ];
+
+      const randomJawaban = jawaban[Math.floor(Math.random() * jawaban.length)];
+      resultDiv.innerText = randomJawaban;
+    }
+  </script>
+
+</body>
+</html>
